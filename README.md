@@ -14,6 +14,8 @@ Bre-AI adalah starter aplikasi AI internal dengan React, FastAPI, PostgreSQL, da
 
 ## Menjalankan dengan Docker
 
+Edit konfigurasi di `.env` jika perlu, terutama `POSTGRES_PASSWORD`, `JWT_SECRET`, dan `DEFAULT_ADMIN_PASSWORD`.
+
 ```bash
 docker compose up --build
 ```
@@ -41,4 +43,6 @@ Login awal:
   - `models`: model database SQLAlchemy
   - `schemas`: kontrak request/response Pydantic
 - `backend/database/init.sql`: schema dan seed PostgreSQL
+- `.env`: konfigurasi lokal Docker, database, JWT, CORS, dan admin awal
+- `.env.example`: template konfigurasi untuk environment lain
 - `storage`: tempat upload, output, model, dan log

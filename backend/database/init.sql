@@ -44,18 +44,6 @@ create table if not exists user_settings (
     updated_at timestamptz not null default now()
 );
 
-insert into users (email, password_hash, role)
-values (
-    'admin@bre.ai',
-    '$plain$admin123',
-    'admin'
-)
-on conflict (email) do nothing;
-
-insert into user_settings (user_id, display_name)
-select id, 'Admin Bre-AI' from users where email = 'admin@bre.ai'
-on conflict (user_id) do nothing;
-
 insert into modules (name, description, enabled)
 values
     ('chat', 'Asisten percakapan untuk tanya jawab internal.', true),
@@ -67,9 +55,3 @@ values
     ('scheduler', 'Penjadwalan job otomatis.', false),
     ('notification', 'Pengiriman notifikasi ke user dan channel eksternal.', true)
 on conflict (name) do nothing;
-
-insert into activity_logs (action, description, user_id)
-select 'system_ready', 'Bre-AI database berhasil diinisialisasi.', id
-from users
-where email = 'admin@bre.ai'
-on conflict do nothing;

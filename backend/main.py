@@ -2,7 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from api.router import api_router
-from database.connection import Base, engine
+from database.connection import Base, SessionLocal, engine
+from services.seed_service import seed_defaults
 from utils.config import settings
 
 Base.metadata.create_all(bind=engine)
@@ -23,6 +24,9 @@ def create_app() -> FastAPI:
     @app.get("/health")
     def health_check():
         return {"status": "ok", "service": settings.app_name}
+
+    with SessionLocal() as db:
+        seed_defaults(db)
 
     return app
 
