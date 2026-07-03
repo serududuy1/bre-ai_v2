@@ -30,6 +30,15 @@ Login awal:
 ## Struktur
 
 - `frontend`: aplikasi React
+  - `src/pages`: halaman Login, Dashboard, Database, File Upload, History, User Settings, Module Manager
+  - `src/components`: komponen UI reusable
+  - `src/layouts`: layout aplikasi
+  - `src/hooks`: hook akses API
+  - `src/services`: service client untuk auth/session
 - `backend`: aplikasi FastAPI
+  - `api`: router HTTP per domain
+  - `services`: business logic per domain
+  - `models`: model database SQLAlchemy
+  - `schemas`: kontrak request/response Pydantic
 - `backend/database/init.sql`: schema dan seed PostgreSQL
 - `storage`: tempat upload, output, model, dan log
