@@ -9,7 +9,7 @@ from utils.config import settings
 
 MODULE_SEEDS = [
     ("chat", "Asisten percakapan untuk tanya jawab internal.", True),
-    ("autorecon", "Otomasi rekonsiliasi data dan pencocokan transaksi.", True),
+    ("autorecon", "Otomasi rekonsiliasi multiple files dan pencocokan data.", True),
     ("ocr", "Ekstraksi teks dari dokumen dan gambar.", True),
     ("rag", "Retrieval augmented generation untuk knowledge base.", True),
     ("analytics", "Analisis metrik operasional dan aktivitas sistem.", True),

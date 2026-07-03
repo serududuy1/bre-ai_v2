@@ -8,7 +8,7 @@ export async function loginWithEmail(email, password) {
   });
   const data = await response.json();
   if (!response.ok) {
-    throw new Error(data.detail || 'Login gagal.');
+    throw new Error(data.error?.message || data.detail || 'Login gagal.');
   }
   return data;
 }

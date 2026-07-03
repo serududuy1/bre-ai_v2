@@ -252,13 +252,66 @@ select {
 }
 
 .form-stack input,
-.form-stack select {
+.form-stack select,
+.recon-form input {
   width: 100%;
   border: 1px solid #c5d0d7;
   border-radius: 6px;
   padding: 11px 12px;
   color: #172026;
   background: white;
+}
+
+.recon-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.recon-form label {
+  display: grid;
+  gap: 7px;
+  color: #52616b;
+  font-weight: 600;
+}
+
+.recon-form .file-drop,
+.recon-form .chip-list,
+.recon-form .error-box {
+  grid-column: 1 / -1;
+}
+
+.recon-form .primary-button {
+  align-self: end;
+}
+
+.recon-stats {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.recon-table {
+  display: grid;
+  border: 1px solid #d9e0e5;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.recon-table > div {
+  display: grid;
+  grid-template-columns: 160px 160px 1fr;
+  gap: 12px;
+  padding: 11px 12px;
+  border-bottom: 1px solid #d9e0e5;
+}
+
+.recon-table > div:last-child {
+  border-bottom: 0;
+}
+
+.recon-table-head {
+  color: #52616b;
+  background: #f3f6f8;
+  font-weight: 700;
 }
 
 .primary-button {
@@ -415,7 +468,13 @@ select {
   }
 
   .stats-row,
+  .recon-stats,
+  .recon-form,
   .two-column {
+    grid-template-columns: 1fr;
+  }
+
+  .recon-table > div {
     grid-template-columns: 1fr;
   }
 

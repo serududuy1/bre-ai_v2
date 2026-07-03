@@ -44,6 +44,17 @@ create table if not exists user_settings (
     updated_at timestamptz not null default now()
 );
 
+create table if not exists autorecon_jobs (
+    id serial primary key,
+    job_name varchar(160) not null,
+    key_column varchar(120) not null,
+    input_files jsonb not null default '[]'::jsonb,
+    summary jsonb not null default '{}'::jsonb,
+    output_path text,
+    created_by integer references users(id) on delete set null,
+    created_at timestamptz not null default now()
+);
+
 insert into modules (name, description, enabled)
 values
     ('chat', 'Asisten percakapan untuk tanya jawab internal.', true),

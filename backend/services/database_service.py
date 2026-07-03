@@ -1,7 +1,14 @@
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
-SUMMARY_TABLES = ["users", "modules", "uploaded_files", "activity_logs", "user_settings"]
+SUMMARY_TABLES = [
+    "users",
+    "modules",
+    "uploaded_files",
+    "activity_logs",
+    "user_settings",
+    "autorecon_jobs",
+]
 
 
 def get_public_tables(db: Session) -> list[str]:
