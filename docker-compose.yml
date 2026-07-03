@@ -1,1 +1,50 @@
-services: {}
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: bre-ai-db
+    environment:
+      POSTGRES_DB: bre_ai
+      POSTGRES_USER: bre_user
+      POSTGRES_PASSWORD: bre_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bre_user -d bre_ai"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+    container_name: bre-ai-backend
+    environment:
+      APP_NAME: Bre-AI
+      DATABASE_URL: postgresql+psycopg://bre_user:bre_password@db:5432/bre_ai
+      JWT_SECRET: change-me-in-production
+      ACCESS_TOKEN_EXPIRE_MINUTES: 720
+      UPLOAD_DIR: /app/storage/uploads
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./storage:/app/storage
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: bre-ai-frontend
+    environment:
+      VITE_API_BASE_URL: http://localhost:8000
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
